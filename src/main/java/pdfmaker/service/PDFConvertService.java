@@ -1,5 +1,6 @@
 package pdfmaker.service;
 
+import com.google.gson.Gson;
 import org.springframework.stereotype.Service;
 import pdfmaker.converter.Converter;
 import pdfmaker.converter.option.ConverterOption;
@@ -10,15 +11,25 @@ import java.io.InputStream;
 import java.nio.file.Path;
 
 /**
- * Created by bobrov on 24.09.17.
+ * Сервис-прослойка для использовангия конвертера.
+ *
+ * @author lWeRl
+ * 24.09.17.
  */
 @Service
 public class PDFConvertService {
 
-    public InputStream convert(ConverterOption option, String content) throws IOException, InterruptedException {
+    public InputStream convert(String optionJson, String content) throws IOException, InterruptedException {
+        // Дессириализуем опции в объект
+        ConverterOption option = new Gson().fromJson(optionJson, ConverterOption.class);
+        // Создаем временый файл, для обмена с внешними процессами конвертации
         Path temp = TempFileHelper.makeTempFileFromString(content);
-        Converter converter = new Converter(option);
-        return converter.convert(temp);
+        // Получем результирующий InputStream
+        InputStream result =  new Converter(option).convert(temp);
+        // Чистим временные файлы
+        TempFileHelper.deleteTempHtmlAndPdfFiles(temp);
+
+        return result;
     }
 
 }

@@ -2,6 +2,7 @@ package pdfmaker.converter;
 
 import pdfmaker.converter.option.ConverterOption;
 import pdfmaker.converter.strategy.ConverterStrategy;
+import pdfmaker.helper.TempFileHelper;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -11,7 +12,11 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 /**
- * Created by bobrov on 24.09.17.
+ * Объект конвертера,
+ * стретигия выбираеться из объекта опций
+ *
+ * @author lWeRl
+ * 24.09.17.
  */
 public class Converter {
 
@@ -24,16 +29,18 @@ public class Converter {
     }
 
     public InputStream convert(Path file) throws IOException, InterruptedException {
+
+        // Создаем пути в виде строк
         String htmlFilePath = file.toAbsolutePath().toString();
-        String pdfFilePath = htmlFilePath.replace(".html", ".pdf");
+        String pdfFilePath = TempFileHelper.getPdfFilePath(file);
+
+        // Вызываем стратегию
         strategy.convert(option, htmlFilePath, pdfFilePath);
+
+        // Получаем InputStream(ByteInputStream - для возможности удаления временных файлов)
         Path pdfFile = Paths.get(pdfFilePath);
         byte[] buffer = Files.readAllBytes(pdfFile);
-        InputStream result = new ByteArrayInputStream(buffer);
-        // Удаляем временные файлы
-        Files.delete(file);
-        Files.delete(pdfFile);
-        return result;
+        return new ByteArrayInputStream(buffer);
     }
 
 }

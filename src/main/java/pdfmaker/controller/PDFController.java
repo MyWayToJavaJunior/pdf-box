@@ -15,7 +15,10 @@ import pdfmaker.service.PDFConvertService;
 import java.io.*;
 
 /**
- * Created by bobrov on 24.09.17.
+ * Конроллер микросервиса
+ *
+ * @author lWeRl
+ * 24.09.17.
  */
 @RestController
 public class PDFController {
@@ -27,28 +30,26 @@ public class PDFController {
         this.service = service;
     }
 
-    @RequestMapping("/test")
-    public String test() {
-        return "Test";
-    }
-
     @RequestMapping(value = "/convert", method = RequestMethod.POST)
     public ResponseEntity convertToPDF(
             @RequestParam(value = "option") String optionJson,
             @RequestParam(value = "content") String content
     ) throws FileNotFoundException {
-        Gson gson = new Gson();
-        ConverterOption option = gson.fromJson(optionJson, ConverterOption.class);
         try {
-            InputStream result = service.convert(option, content);
+            // Конвертируем
+            InputStream result = service.convert(optionJson, content);
+            // Отдаем ответ
             return ResponseEntity
                     .ok()
                     .contentLength(result.available())
-                    .contentType(
-                            MediaType.parseMediaType("application/octet-stream"))
+                    .contentType(MediaType.parseMediaType("application/octet-stream"))
                     .body(new InputStreamResource(result));
-        } catch (IOException | InterruptedException e) {
-            return ResponseEntity.status(500).contentType(MediaType.TEXT_PLAIN).body(e.toString());
+        } catch (Exception e) {
+            // Обрабатываем ошибки
+            return ResponseEntity
+                    .status(500)
+                    .contentType(MediaType.TEXT_PLAIN)
+                    .body(e.toString() + ":" + e.getMessage());
         }
     }
 }

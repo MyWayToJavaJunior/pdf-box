@@ -3,7 +3,11 @@ package pdfmaker.converter.strategy;
 import pdfmaker.converter.option.ConverterOption;
 
 /**
- * Created by bobrov on 24.09.17.
+ * Стратегия конвертирования HTML в PDF
+ * посредсвам внешеней программы wkhtmltopdf
+ *
+ * @author lWeRl
+ * 24.09.17.
  */
 public class WkhtmltopdfConverterStrategy implements ConverterStrategy {
     @Override

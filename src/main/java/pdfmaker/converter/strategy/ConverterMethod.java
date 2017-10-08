@@ -1,10 +1,14 @@
-package pdfmaker.converter;
+package pdfmaker.converter.strategy;
 
 import pdfmaker.converter.strategy.ConverterStrategy;
 import pdfmaker.converter.strategy.ElectronConverterStrategy;
 
 /**
- * Created by bobrov on 24.09.17.
+ * Перечисление стратегий конвертирований HTML в PDF
+ * Каждый элемент перечисления связан с конкретной стратегией
+ *
+ * @author lWeRl
+ * 24.09.17.
  */
 public enum ConverterMethod {
 
