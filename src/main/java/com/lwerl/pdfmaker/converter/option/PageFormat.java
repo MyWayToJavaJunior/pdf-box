@@ -1,4 +1,4 @@
-package pdfmaker.converter.option;
+package com.lwerl.pdfmaker.converter.option;
 
 /**
  * Набор форматов страниц

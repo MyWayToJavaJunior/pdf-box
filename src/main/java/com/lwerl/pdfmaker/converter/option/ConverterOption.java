@@ -1,6 +1,6 @@
-package pdfmaker.converter.option;
+package com.lwerl.pdfmaker.converter.option;
 
-import pdfmaker.converter.strategy.ConverterMethod;
+import com.lwerl.pdfmaker.converter.strategy.ConverterMethod;
 
 /**
  * Набор опций пердоставляющий API сервиса

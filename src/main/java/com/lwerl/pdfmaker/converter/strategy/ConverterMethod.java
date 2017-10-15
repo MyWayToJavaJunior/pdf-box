@@ -1,7 +1,4 @@
-package pdfmaker.converter.strategy;
-
-import pdfmaker.converter.strategy.ConverterStrategy;
-import pdfmaker.converter.strategy.ElectronConverterStrategy;
+package com.lwerl.pdfmaker.converter.strategy;
 
 /**
  * Перечисление стратегий конвертирований HTML в PDF

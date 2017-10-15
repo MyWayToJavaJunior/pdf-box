@@ -1,6 +1,5 @@
-package pdfmaker.controller;
+package com.lwerl.pdfmaker.controller;
 
-import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.MediaType;
@@ -9,8 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import pdfmaker.converter.option.ConverterOption;
-import pdfmaker.service.PDFConvertService;
+import com.lwerl.pdfmaker.service.PDFConvertService;
 
 import java.io.*;
 

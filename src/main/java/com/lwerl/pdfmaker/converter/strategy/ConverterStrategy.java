@@ -1,6 +1,6 @@
-package pdfmaker.converter.strategy;
+package com.lwerl.pdfmaker.converter.strategy;
 
-import pdfmaker.converter.option.ConverterOption;
+import com.lwerl.pdfmaker.converter.option.ConverterOption;
 
 import java.io.IOException;
 
